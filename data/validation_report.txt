@@ -1,0 +1,65 @@
+================================================================================
+SYNTHETIC DATASET GENERATION & VALIDATION AUDIT REPORT
+Project: PRJ-AIA-01 | Absenteeism Impact Analysis
+Generated Date: 2026-11-20 14:42:52
+Random Seed: 42
+================================================================================
+
+1. ROW COUNT & COMPLIANCE VERIFICATION:
+--------------------------------------------------------------------------------
+- dim_departments:             6 rows (Planned: 6)        -> [PASS]
+- dim_reasons:                28 rows (Planned: 28)       -> [PASS]
+- dim_employees:             120 rows (Planned: 100-150)  -> [PASS]
+- fact_absence_events:       320 rows (Planned: 150+)      -> [PASS]
+- v_absence_analysis_joined:  320 rows (32 Columns)         -> [PASS]
+
+2. REFERENTIAL INTEGRITY (FOREIGN KEY) AUDIT:
+--------------------------------------------------------------------------------
+- fact_absence_events.employee_id -> dim_employees.employee_id:
+  Orphan FK count: 0 (100% resolve to valid employee records) -> [PASS]
+- fact_absence_events.reason_code -> dim_reasons.reason_code:
+  Orphan FK count: 0 (100% resolve to valid ICD-10 reasons)  -> [PASS]
+- dim_employees.department_id -> dim_departments.department_id:
+  Orphan FK count: 0 (100% resolve to valid departments)      -> [PASS]
+
+3. ATTRIBUTE RANGE & SANITY CHECKS:
+--------------------------------------------------------------------------------
+- Employee Age Range:            [22 to 62 yrs] (Constraint: 18-70) -> [PASS]
+- Employee Hourly Wage:          [$20.39 to $84.89] (Constraint: >0)  -> [PASS]
+- Employee BMI Range:            [17.5 to 38.3] (Constraint: 10-60)  -> [PASS]
+- Absence Event Duration Hours:  [4.0 to 40.0 hrs] (Constraint: 1-40) -> [PASS]
+- Total Direct Wage Loss:        $177,155.36
+- Total Loss with 1.20x Overtime: $212,586.26
+
+4. EMBEDDED REALISTIC PATTERNS:
+--------------------------------------------------------------------------------
+[Pattern 1] Monday & Friday Absence Spike:
+  Monday: 141 events | Friday: 73 events
+  Midweek Mean (Tue-Thu): 35.3 events
+  -> Monday/Friday surge is +26.4% higher than midweek baseline.
+
+[Pattern 2] Pareto 80/20 Disruption Concentration (Bradford Factor):
+  Top 14 High-Risk Employees (11.7% of workforce) account for:
+  2,040.0 out of 3,656.0 hours (55.8% of total).
+  These employees trigger High (B >= 250) and Severe (B >= 750) Bradford Factor alerts.
+
+[Pattern 3] Commute Distance Friction:
+  Employees commuting > 30 km have an average of 4.58 absences/yr
+  compared to 3.56 for nearby staff.
+
+[Pattern 4] BMI & Physiological Determinants:
+  Obese employees (BMI >= 30) exhibit higher average absence hours (10.65 hrs/event)
+  vs Normal BMI employees (11.62 hrs/event), predominantly driven by ICD-10 Musculoskeletal disorders.
+
+[Pattern 5] Seasonal Infection / Respiratory Surge (Monsoon Q3):
+  Q3 (Jul-Sep) accounts for 92 events (28.7% of annual volume),
+  with elevated spikes in Respiratory (ICD-10 J00-J99) and Viral conditions.
+
+5. INTENTIONAL DATA QUALITY ANOMALIES (Staged for Step 15 Data Cleaning):
+--------------------------------------------------------------------------------
+- Staged in raw files (df_employees_raw & df_fact_raw):
+  1. Missing Values: 3 nulls injected in daily_transit_cost (Indices: 12, 45, 88); 2 nulls in distance_to_work_km (Indices: 23, 71).
+  2. Duplicate Records: 2 duplicate rows injected into raw event log (Rows 14 & 82 cloned).
+  3. Extreme Outliers: 1 erroneous duration of 96.0 hours logged (Row 3, impossible weekly duration).
+- Sanitized in data/app.db: The SQLite production database holds the validated, constraint-compliant dataset for immediate analytical querying.
+================================================================================

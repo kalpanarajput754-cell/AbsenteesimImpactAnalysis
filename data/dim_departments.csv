@@ -1,0 +1,7 @@
+department_id,department_name,cost_center_code,standard_hourly_rate,fte_headcount
+1,Engineering,CC-ENG-101,52.5,42
+2,Sales & Marketing,CC-SLS-102,41.0,28
+3,Operations & Logistics,CC-OPS-103,34.5,35
+4,Customer Support,CC-SUP-104,26.0,22
+5,Finance & Accounting,CC-FIN-105,48.0,14
+6,Human Resources,CC-HR-106,38.0,9

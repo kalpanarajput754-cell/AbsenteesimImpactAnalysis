@@ -1,0 +1,29 @@
+reason_code,category_type,icd_chapter_code,reason_description,is_preventable,risk_level
+1,Medical,A00-B99,Infectious and parasitic diseases,1,Medium
+2,Medical,C00-D48,Neoplasms (tumors),0,High
+3,Medical,D50-D89,Diseases of blood and blood-forming organs,0,Medium
+4,Medical,E00-E90,"Endocrine, nutritional and metabolic diseases",1,Medium
+5,Medical,F00-F99,"Mental, behavioral and neurodevelopmental disorders",1,High
+6,Medical,G00-G99,Diseases of the nervous system (e.g. Migraine),1,Medium
+7,Medical,H00-H59,Diseases of the eye and adnexa,1,Low
+8,Medical,H60-H95,Diseases of the ear and mastoid process,1,Low
+9,Medical,I00-I99,Diseases of the circulatory system (Cardiovascular),1,High
+10,Medical,J00-J99,"Diseases of the respiratory system (Flu, Bronchitis)",1,Medium
+11,Medical,K00-K93,Diseases of the digestive system (Gastroenteritis),1,Medium
+12,Medical,L00-L99,Diseases of the skin and subcutaneous tissue,1,Low
+13,Medical,M00-M99,Diseases of the musculoskeletal system & back pain,1,High
+14,Medical,N00-N99,Diseases of the genitourinary system,0,Medium
+15,Medical,O00-O99,"Pregnancy, childbirth and the puerperium",0,Medium
+16,Medical,P00-P96,Perinatal conditions,0,Low
+17,Medical,Q00-Q99,Congenital malformations and deformations,0,Medium
+18,Medical,R00-R99,"Symptoms, signs and abnormal clinical findings",1,Low
+19,Medical,S00-T98,"Injury, poisoning and external physical trauma",1,High
+20,Medical,V01-Y98,External causes of morbidity and mortality,0,Medium
+21,Medical,Z00-Z99,Factors influencing health status & consultations,1,Low
+22,Non-Medical,,Patient follow-up examination,1,Low
+23,Non-Medical,,Medical consultation appointment,1,Low
+24,Non-Medical,,Blood donation drive,0,Low
+25,Non-Medical,,Laboratory diagnostic tests,1,Low
+26,Non-Medical,,Unjustified / Casual emergency absence,1,High
+27,Non-Medical,,Physiotherapy & ergonomic session,1,Low
+28,Non-Medical,,Dental examination and treatment,1,Low
